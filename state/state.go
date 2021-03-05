@@ -26,22 +26,22 @@ func GetInstance() IState {
 
 	s := State{ID: "state_" + strconv.Itoa(idIncrementor)}
 
-	return s
+	return &s
 }
 
-func (s State) GetID() string {
+func (s *State) GetID() string {
 	return s.ID
 }
 
-func (s State) GetCities() []city.ICity {
+func (s *State) GetCities() []city.ICity {
 	return s.Cities
 }
 
-func (s State) AddCity(c city.ICity) {
+func (s *State) AddCity(c city.ICity) {
 	s.Cities = append(s.Cities, c)
 }
 
-func (s State) PurchaseFood(
+func (s *State) PurchaseFood(
 	cityID string, storeID string, f item.FoodItem, qty int,
 ) {
 	for i := 0; i < len(s.Cities); i++ {
@@ -52,7 +52,7 @@ func (s State) PurchaseFood(
 	}
 }
 
-func (s State) PurchaseBeverage(
+func (s *State) PurchaseBeverage(
 	cityID string, storeID string, b item.BeverageItem, qty int,
 ) {
 	for i := 0; i < len(s.Cities); i++ {

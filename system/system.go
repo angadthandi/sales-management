@@ -20,18 +20,18 @@ type System struct {
 func GetInstance() ISystem {
 	s := System{}
 
-	return s
+	return &s
 }
 
-func (s System) GetStates() []state.IState {
+func (s *System) GetStates() []state.IState {
 	return s.States
 }
 
-func (s System) AddState(st state.IState) {
+func (s *System) AddState(st state.IState) {
 	s.States = append(s.States, st)
 }
 
-func (s System) PurchaseFood(
+func (s *System) PurchaseFood(
 	stateID string, cityID string, storeID string,
 	f item.FoodItem, qty int,
 ) {
@@ -43,7 +43,7 @@ func (s System) PurchaseFood(
 	}
 }
 
-func (s System) PurchaseBeverage(
+func (s *System) PurchaseBeverage(
 	stateID string, cityID string, storeID string,
 	b item.BeverageItem, qty int,
 ) {

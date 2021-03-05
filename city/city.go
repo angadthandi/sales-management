@@ -35,24 +35,24 @@ func GetInstance(
 		BeveragePrices: beveragePriceMap,
 	}
 
-	return c
+	return &c
 }
 
-func (c City) GetID() string {
+func (c *City) GetID() string {
 	return c.ID
 }
 
-func (c City) GetStores() []store.IStore {
+func (c *City) GetStores() []store.IStore {
 	return c.Stores
 }
 
-func (c City) AddStore(s store.IStore) {
+func (c *City) AddStore(s store.IStore) {
 	s.SetFoodRates(c.FoodPrices)
 	s.SetBeverageRates(c.BeveragePrices)
 	c.Stores = append(c.Stores, s)
 }
 
-func (c City) PurchaseFood(storeID string, f item.FoodItem, qty int) {
+func (c *City) PurchaseFood(storeID string, f item.FoodItem, qty int) {
 	for i := 0; i < len(c.Stores); i++ {
 		if c.Stores[i].GetID() == storeID {
 			c.Stores[i].PurchaseFood(f, qty)
@@ -61,7 +61,7 @@ func (c City) PurchaseFood(storeID string, f item.FoodItem, qty int) {
 	}
 }
 
-func (c City) PurchaseBeverage(storeID string, b item.BeverageItem, qty int) {
+func (c *City) PurchaseBeverage(storeID string, b item.BeverageItem, qty int) {
 	for i := 0; i < len(c.Stores); i++ {
 		if c.Stores[i].GetID() == storeID {
 			c.Stores[i].PurchaseBeverage(b, qty)
